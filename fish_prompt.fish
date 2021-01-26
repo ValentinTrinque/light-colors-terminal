@@ -9,7 +9,7 @@ function fish_prompt --description 'Informative prompt'
         set -l upstream (command git rev-parse --abbrev-ref --symbolic-full-name "@{u}" 2>/dev/null)
     
         if test "$upstream" != ""
-            command git rev-list --count --left-right $upstream...HEAD 2>/dev/null | read -l commit_ahead commit_behind
+            command git rev-list --count --left-right $upstream...HEAD 2>/dev/null | read -l commit_behind commit_ahead
             if test "$commit_ahead" -gt 0
                 set git_status "$git_status"↑"$ahead "
             end
