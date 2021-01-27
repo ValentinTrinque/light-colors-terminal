@@ -11,11 +11,11 @@ function fish_prompt --description 'Informative prompt'
         if test "$upstream" != ""
             command git rev-list --count --left-right $upstream...HEAD 2>/dev/null | read -l commit_behind commit_ahead
             if test "$commit_ahead" -gt 0
-                set git_status "$git_status"↑"$ahead "
+                set git_status "$git_status"↑"$commit_ahead "
             end
 
             if test "$commit_behind" -gt 0
-                set git_status "$git_status"↓"$behind "
+                set git_status "$git_status"↓"$commit_behind "
             end
         end
 
