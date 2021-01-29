@@ -8,7 +8,7 @@ function fish_prompt --description 'Informative prompt'
         # Count commit tree diff
         set -l upstream (command git rev-parse --abbrev-ref --symbolic-full-name "@{u}" 2>/dev/null)
     
-        if test "$upstream" != ""
+        if test "$upstream" != "" && test "$upstream" != "@{u}"
             command git rev-list --count --left-right $upstream...HEAD 2>/dev/null | read -l commit_behind commit_ahead
             if test "$commit_ahead" -gt 0
                 set git_status "$git_status"↑"$commit_ahead "
