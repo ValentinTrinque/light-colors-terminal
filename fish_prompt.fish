@@ -1,3 +1,18 @@
+set prompt_red "#E11D48"
+set prompt_brred "#FFE4E6"
+set prompt_green "#059669"
+set prompt_brgreen "#D1FAE5"
+set prompt_yellow "#EA580C"
+set prompt_bryellow "#FFEDD5"
+set prompt_blue "#0284C7"
+set prompt_brblue "#E0F2FE"
+set prompt_magenta "#DB2777"
+set prompt_brmagenta "#FCE7F3"
+set prompt_cyan "#0891B2"
+set prompt_brcyan "#CFFAFE"
+set prompt_white "#4B5563"
+set prompt_brwhite "#F3F4F6"
+
 function fish_prompt --description 'Informative prompt'
 
     # Save the return status of the previous command
@@ -26,10 +41,10 @@ function fish_prompt --description 'Informative prompt'
         end 
 
         if test "$git_status" != ""
-            set git_status (set_color yellow)(set_color -b bryellow)" $git_status"
+            set git_status (set_color -o $prompt_yellow)" $git_status"
         end
         
-        set git_info (set_color green)(set_color -b brgreen)" ⌥ $git_branch $git_status"(set_color normal)(set_color -b normal)
+        set git_info (set_color -o $prompt_green)" ⌥ $git_branch $git_status"(set_color normal)(set_color -b normal)
     end
 
    
@@ -40,11 +55,11 @@ function fish_prompt --description 'Informative prompt'
                 (prompt_p wd) (set_color normal)
         case '*'
             set -l pipestatus_string (__print_pipestatus $last_pipestatus)
-            set -l xtime (set_color white)(set_color -b brwhite)" "(date "+%H:%M:%S")" "(set_color normal)(set_color -b normal)
-            set -l path (set_color blue)(set_color -b brblue)" "(__print_pwd)" "(set_color normal)(set_color -b normal)
-            set -l cmd (set_color -b normal)(set_color bryellow)"❯❯❯"(set_color normal)(set_color -b normal)" "
+            set -l xtime (set_color -o $prompt_white)(date "+%H:%M:%S")" "(set_color normal)(set_color -b normal)
+            set -l path (set_color -o $prompt_blue)" "(__print_pwd)" "(set_color normal)(set_color -b normal)
+            set -l cmd (set_color -o $prompt_yellow)"❯❯❯"(set_color normal)(set_color -b normal)" "
 
-            printf "\n\n$fish_git_prompt$xtime$path$git_info $pipestatus_string \n$cmd%s"
+            printf "\n\n$xtime$path$git_info $pipestatus_string \n$cmd%s"
     end
 
 end
@@ -65,7 +80,7 @@ function __print_pipestatus --description "Print pipestatus for prompt"
         if test "$last_status" -ne "$argv[1]"
             set last_status_string " "$last_status
         end
-        echo (set_color red)(set_color -b brred)" ["$last_pipestatus_string$last_status_string"] "(set_color normal)(set_color -b normal)
+        echo (set_color -o $prompt_red)" ["$last_pipestatus_string$last_status_string"] "(set_color normal)(set_color -b normal)
     end
 end
 
