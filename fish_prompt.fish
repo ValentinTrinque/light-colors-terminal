@@ -75,7 +75,7 @@ function __print_pipestatus --description "Print pipestatus for prompt"
     # Only print status codes if the job failed.
     # SIGPIPE (141 = 128 + 13) is usually not a failure, see #6375.
     if not contains $last_status 0 141
-        set -l last_pipestatus_string (__fish_status_to_signal $argv | string join "|")
+        set -l last_pipestatus_string (fish_status_to_signal $argv | string join "|")
         set -l last_status_string ""
         if test "$last_status" -ne "$argv[1]"
             set last_status_string " "$last_status
